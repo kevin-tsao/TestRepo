@@ -29,11 +29,6 @@ namespace Test.App_Start
             .AsImplementedInterfaces()
             .InstancePerLifetimeScope();
 
-            builder.RegisterType<IDbConnectionPool>()
-                    .As<IDbConnectionPool>()
-                    // 同一個生命週期共用已開啟的 DB 連線
-                    .InstancePerLifetimeScope();
-
 
             var container = builder.Build();
 
