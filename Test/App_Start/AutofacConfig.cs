@@ -7,8 +7,9 @@ using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
-using Test.Interfaces.Util;
+using Test.Interfaces.Services;
 using Test.Repositories;
+using Test.Services;
 
 namespace Test.App_Start
 {
@@ -19,6 +20,10 @@ namespace Test.App_Start
             var builder = new ContainerBuilder();
 
             var config = GlobalConfiguration.Configuration;
+
+            builder.RegisterType<ProductService>().As<IProductService>();
+
+            builder.RegisterWebApiFilterProvider(config);
 
             builder.RegisterApiControllers(System.Reflection.Assembly.GetExecutingAssembly());
 
