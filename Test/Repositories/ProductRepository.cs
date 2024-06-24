@@ -27,7 +27,42 @@ namespace Test.Repositories
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                return connection.Query<Product>("SELECT * FROM Products");
+                return connection.Query<Product>("SELECT * FROM dbo.Products");
+            }
+        }
+
+        public Product GetProduct(int id)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                return connection.QueryFirstOrDefault<Product>("SELECT * FROM Products WHERE ProductID = @id", new { id });
+            }
+        }
+
+        public int AddProduct(Product product)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                return connection.Execute("INSERT INTO Products (ProductName, UnitPrice, UnitsInStock) VALUES (@ProductName, @UnitPrice, @UnitsInStock)", product);
+            }
+             
+        }
+        public int UpdateProduct(Product product)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                return connection.Execute("UPDATE Products SET ProductName = @ProductName, UnitPrice = @UnitPrice, UnitsInStock = @UnitsInStock WHERE ProductID = @ProductID", product);
+            }
+        }
+        public int DeleteProduct(int id)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                return connection.Execute("DELETE FROM Products WHERE ProductID = @id", new { id });
             }
         }
     }

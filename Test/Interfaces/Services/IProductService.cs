@@ -11,8 +11,8 @@ namespace Test.Interfaces.Services
     {
         IEnumerable<Product> Get();
         Product Get(int id);
-        IHttpActionResult Post([FromBody] Product product);
-        IHttpActionResult Put(int id, [FromBody] Product product);
-        IHttpActionResult Delete(int id);
+        bool Post([FromBody] Product product);
+        bool Put([FromBody] Product product);
+        bool Delete(int id);
     }
 }

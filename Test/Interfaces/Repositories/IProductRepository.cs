@@ -9,10 +9,10 @@ namespace Test.Interfaces.Repositoies
 {
     public interface IProductRepository
     {
-        IEnumerable<Product> Get();
-        Product Get(int id);
-        IHttpActionResult Post(Product product);
-        IHttpActionResult Put(int id, Product product);
-        IHttpActionResult Delete(int id);
+        IEnumerable<Product> GetProducts();
+        Product GetProduct(int id);
+        int AddProduct(Product product);
+        int UpdateProduct(Product product);
+        int DeleteProduct(int id);
     }
 }

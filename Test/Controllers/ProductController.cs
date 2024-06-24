@@ -9,7 +9,7 @@ using Test.Models;
 
 namespace Test.Controllers
 {
-    [RoutePrefix("api/Produc")]
+    [RoutePrefix("api/Product")]
     public class ProductController : ApiController
     {
         public IProductService _productService;
@@ -39,15 +39,15 @@ namespace Test.Controllers
         [AllowAnonymous]
         public IHttpActionResult Post([FromBody] Product product)
         {
-            return Ok(_productService.Post(product));
+            return Ok(_productService.Post(product)? "新增成功" : "新增失敗");
         }
 
         // PUT api/products/5
         [HttpPut]
         [AllowAnonymous]
-        public IHttpActionResult Put(int id, [FromBody] Product product)
+        public IHttpActionResult Put([FromBody] Product product)
         {
-            return Ok(_productService.Put(id, product));
+            return Ok(_productService.Put(product) ? "更新成功" : "更新失敗");
         }
 
         // DELETE api/products/5
@@ -55,7 +55,7 @@ namespace Test.Controllers
         [AllowAnonymous]
         public IHttpActionResult Delete(int id)
         {
-            return Ok(_productService.Delete(id));
+            return Ok(_productService.Delete(id) ? "刪除成功" : "刪除失敗");
         }
     }
 }
