@@ -62,7 +62,20 @@ namespace Test.Repositories
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                return connection.Execute("DELETE FROM Products WHERE ProductID = @id", new { id });
+                var sql = "DELETE FROM Products WHERE ProductID = @id";
+                sql += " DELETE FROM [Order Details] WHERE ProductID = @id";
+                var sqltx = connection.BeginTransaction();
+                var i = 0;
+                try
+                {
+                    i = connection.Execute(sql, new { id }, sqltx);
+                    sqltx.Commit();
+                }
+                catch (Exception ex)
+                {
+                    sqltx.Rollback();
+                }
+                return i;
             }
         }
     }
