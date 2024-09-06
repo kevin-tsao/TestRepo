@@ -19,7 +19,7 @@ namespace Test.Repositories
 
         public ProductRepository()
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["NorthwindConnection"].ConnectionString;
+            _connectionString = ConfigurationManager.ConnectionStrings["TestDB"].ConnectionString;
         }
 
         public IEnumerable<Product> GetProducts()
